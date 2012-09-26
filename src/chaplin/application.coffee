@@ -44,8 +44,10 @@ define [
       # Register all routes declared in routes.coffee
       routes? @router.match
 
-      # After registering the routes, start Backbone.history
-      @router.startHistory()
+      # After registering the routes, start Backbone.history.
+      # Publish an event if no route matched (i.e. to handle 404)
+      unless @router.startHistory()
+        mediator.publish 'noMatchRoute'
 
     # Disposal
     # --------
