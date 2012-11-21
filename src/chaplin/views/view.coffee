@@ -316,7 +316,8 @@ define [
       templateFunc = @getTemplateFunction()
       if typeof templateFunc is 'function'
 
-        # Call the template function passing the template data
+        # Call the template function passing the template data.
+        # Will return the compiled html to be inserted into the el
         html = templateFunc @getTemplateData()
 
         # Replace HTML

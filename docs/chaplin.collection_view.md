@@ -74,8 +74,8 @@ The `CollectionView` is responsible for displaying collections. For every item i
 <a id="filterer"></a>
 ### filterer(item, index)
 * **Model item**
-* **int index of ***item*** in collection**
-* **returns boolean: is item included?**
+* **int index of *item* in collection**
+* returns boolean: is item included?
 
   A iterator function that determines which items are shown. Can be passed
   in during instantiation via `options`. The function is optional; if not
@@ -97,9 +97,9 @@ filterer: (item, index) ->
 * **View view**
 * **boolean included**
 
-  Called on each item in the collection during filtering
+  Called on each item in the collection during filtering.
 
-  Default is to hide excluded views
+  Default hides excluded views.
 
 ```coffeescript
 filterCallback: (view, included) ->
