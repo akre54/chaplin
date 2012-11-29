@@ -4,38 +4,33 @@ The `CollectionView` is responsible for displaying collections. For every item i
 
 ## Properties of `Chaplin.CollectionView`
 
-<a id="itemView"></a>
-### itemView
+### itemView <a id="itemView"/>
 * **a View that extends from Chaplin.View (default null)**
 
   Your item View class, which will represent the individual items
   in the collection
 
-<a id="autoRender"></a>
-### autoRender
+### autoRender <a id="autoRender"/>
 * **boolean (default true)**
 
   Render the view automatically on instantiation. This overrides
   Chaplin.View's default of false. Your inheriting classes (and
   instatiated objects via the options hash) can set their own value.
 
-<a id="renderItems"></a>
-###  RenderItems
+###  RenderItems <a id="renderItems"/>
 * **boolean (default true)**
 
   Should the view automatically render all items on instantiation?
 
   Can be passed during instantiation via the options hash.
 
-<a id="animationDuration"></a>
-### animationDuration
+### animationDuration <a id="animationDuration"/>
 * **int, duration in ms (default 500)**
 
   When new items are added, their views are faded in over a period of
   `animationDuration` milliseconds. Set to 0 to disable fade in.
 
-<a id="useCssAnimation"></a>
-### useCssAnimation
+### useCssAnimation <a id="useCssAnimation"/>
 * **boolean (default false)**
 
   By default, fading in is done by javascript function which can be
@@ -44,16 +39,14 @@ The `CollectionView` is responsible for displaying collections. For every item i
 
   CSS classes used are: **animated-item-view**, **animated-item-view-end**.
 
-<a id="methods-overview"></a>
-## Methods of `Chaplin.CollectionView`
+## Methods of `Chaplin.CollectionView` <a id="methods-overview"/>
   Most of CollectionView's methods should not need to be called
   externally. Modifying the underlying collection will automatically
   update the items on screen (for instance, fetching more models
   from the server), as the view listens for `add`, `remove`, and
   `reset` events by default.
 
-<a id="initialize"></a>
-### initialize([options={}])
+### initialize([options={}]) <a id="initialize"/>
 * **options**
     * **renderItems** see [renderItems](#renderItems)
     * **itemView** see [itemView](#itemView)
@@ -61,8 +54,7 @@ The `CollectionView` is responsible for displaying collections. For every item i
     * all [View](./Chaplin.View.md#initialize) and standard
     [Backbone.View](http://backbonejs.org/#View-constructor) options
 
-<a id="filter"></a>
-### filter([filterer, [filterCallback]])
+### filter([filterer, [filterCallback]]) <a id="filter"/>
 * **function filterer (see below)**
 * **function filterCallback (see below)**
 
@@ -71,8 +63,7 @@ The `CollectionView` is responsible for displaying collections. For every item i
 
   Called with no arguments is a no-op
 
-<a id="filterer"></a>
-### filterer(item, index)
+### filterer(item, index) <a id="filterer"/>
 * **Model item**
 * **int index of *item* in collection**
 * returns boolean: is item included?
@@ -92,8 +83,7 @@ filterer: (item, index) ->
 
 ```
 
-<a id="filterCallback"></a>
-### filterCallback(view, included)
+### filterCallback(view, included) <a id="filterCallback"/>
 * **View view**
 * **boolean included**
 
@@ -112,46 +102,39 @@ filterCallback: (view, included) ->
   view.showExtendedOptions(opts)
 ```
 
-<a id="addCollectionListeners"></a>
-### addCollectionListeners()
+### addCollectionListeners() <a id="addCollectionListeners"/>
 
   By default adds event listeners for `add`, `remove`, and `reset` events. Can
   be extended to track more events.
 
-<a id="getItemViews"></a>
-### getItemViews()
+### getItemViews() <a id="getItemViews"/>
 
   Returns a hash of views, keyed by their `cid` property
 
-<a id="renderAllItems"></a>
-### renderAllItems()
+### renderAllItems() <a id="renderAllItems"/>
 
   Render and insert all items in collection, triggering `visibilityChange` event
 
-<a id="renderAndInsertItem"></a>
-### renderAndInsertItem(item, index)
+### renderAndInsertItem(item, index) <a id="renderAndInsertItem"/>
 * **Model item**
 * **int index**
 
   a composite of [`@renderItem()`](#renderItem) and [`@insertView()`](#insertView)
 
-<a id="renderItem"></a>
-### renderItem(item)
+### renderItem(item) <a id="renderItem"/>
 * **Model item**
 
   Instantiate and render the view for an item using the `viewsByCid`
   hash as a cache.
 
-<a id="getView"></a>
-### getView(model)
+### getView(model) <a id="getView"/>
 * **Model model**
 
   Returns an instance of the view class (as determined by `@itemView`).
   Override this method to use several item view constructors depending
   on the model type or data.
 
-<a id="insertView"></a>
-### insertView(item, view, [index], [enableAnimation])
+### insertView(item, view, [index], [enableAnimation]) <a id="insertView"/>
 * **Model item**
 * **View view**
 * **int index (if unset will search through collection)**
@@ -160,14 +143,12 @@ filterCallback: (view, included) ->
   Inserts a view into the list at the proper position, runs the `@filterer`
   function.
 
-<a id="removeViewForItem"></a>
-### removeViewForItem(item)
+### removeViewForItem(item) <a id="removeViewForItem"/>
 * **Model item**
 
   Remove the view for an item, triggering a `visibilityChange` event
 
-<a id="updateVisibleItems"></a>
-### updateVisibleItems(item, [includedInFilter], [triggerEvent])
+### updateVisibleItems(item, [includedInFilter], [triggerEvent]) <a id="updateVisibleItems"/>
 * **Model item**
 * **boolean includedInFilter**
 * **triggerEvent (default true)**

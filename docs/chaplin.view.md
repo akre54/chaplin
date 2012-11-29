@@ -19,8 +19,7 @@ Also, `@model.bind()` should not be used directly. Chaplin has `@modelBind()` wh
 - Creating subviews
 - Disposal which cleans up all subviews, model bindings and Pub/Sub events
 
-<a id="initialize"></a>
-### initialize(options)
+### initialize(options) <a id="initialize"/>
 * **options (default: empty hash)**
     * `autoRender` see [autoRender](#autoRender)
     * `container` see [container](#container)
@@ -36,8 +35,7 @@ Also, `@model.bind()` should not be used directly. Chaplin has `@modelBind()` wh
   Backbone's initialize method, Chaplin's initialize is required to
   create the instance's subviews and listen for model or collection disposal.
 
-<a id="rendering"></a>
-## Rendering: getTemplateFunction, render, …
+## Rendering: getTemplateFunction, render, … <a id="rendering"/>
 
   Your application should provide a standard way of rendering DOM
   nodes by creating HTML from templates and template data. Chaplin
@@ -49,8 +47,7 @@ Also, `@model.bind()` should not be used directly. Chaplin has `@modelBind()` wh
   by setting the [`containerMethod`](#containerMethod) property
   (to `html`, `before`, `prepend`, etc).
 
-<a id="getTemplateFunction"></a>
-### getTemplateFunction()
+### getTemplateFunction() <a id="getTemplateFunction"/>
 * **function (throws error if not overriden)**
 
   Core method that returns the compiled template function. Usually
@@ -81,8 +78,7 @@ getTemplateFunction: ->
   precompile the template functions to improve application performance
 
 
-<a id="getTemplateData"></a>
-### getTemplateData()
+### getTemplateData() <a id="getTemplateData"/>
 * **function that returns Object (throws error if not overriden)**
 
   Empty method which returns the prepared model data for the template. Should
@@ -102,15 +98,12 @@ getTemplateData: ->
 
   often overriden in a base model class to intelligently pick out attributes
 
-<a id="render"></a>
-### render
+### render <a id="render"/>
   By default calls the `templateFunction` with the `templateData` and sets the html
   of the `$el`. Can be overriden in your base view if needed, though should be
   suitable for the majority of cases.
 
-<a id="afterInitialize"></a>
-<a id="afterRender"></a>
-## afterInitialize and afterRender
+## afterInitialize and afterRender <a id="afterInitialize"/><a id="afterRender"/>
   Chaplin's utils provides a `wrapMethod` feature that facilitates creating complex
   class heirarchies. In the default implementation, only `initialize` and `render` are
   wrapped, giving the View `afterInitialize` and `afterRender` methods that are called
@@ -119,18 +112,15 @@ getTemplateData: ->
   `afterInitialize` calls `render` if `autoRender` is true, and `afterRender` attaches
   the View to its `container` element.
 
-<a id="DOM-options"></a>
-## Options for auto-rendering and DOM appending
+## Options for auto-rendering and DOM appending <a id="DOM-options"/>
 
-<a id="autoRender"></a>
-### autoRender
+### autoRender <a id="autoRender"/>
 * **Boolean, default: false**
   
   Specifies whether the the View's `render` method should be called when
   a view is instantiated.
 
-<a id="container"></a>
-### container
+### container <a id="container"/>
 * **jQuery object, selector string, or element, default: null**
   
   A selector for the View's containg element into which the `$el`
@@ -144,16 +134,15 @@ getTemplateData: ->
   
   A container is often an empty element within a parent view.
 
-<a id="containerMethod"></a>
-### containerMethod
+### containerMethod <a id="containerMethod"/>
 * **String, jQuery object method (default: 'append')**
   
   Method which is used for adding the view to the DOM via the `container`
   element. (Like jQuery’s `html`, `prepend`, `append`, `after`, `before` etc.)
   
 ## Event delegation
-<a id="delegate"></a>
-### delegate(eventType, [selector], handler)
+
+### delegate(eventType, [selector], handler) <a id="delegate"/>
 * **String eventType - jQuery DOM event, (e.g. 'click', 'focus', etc )**,
 * **String selector (optional, if not set will bind to the view's $el)**,
 * **function handler (automatically bound to `this`)**
@@ -173,12 +162,10 @@ method signature.
 @delegate('click', 'button.confirm', @confirm)
 ```
 
-<a id="model-binding"></a>
-## Model binding
+## Model binding <a id="model-binding"/>
 Disposal-aware event binding. Binds to the view's `@model` or `@collection`.
 
-<a id="modelBind"></a>
-### modelBind(type, handler)
+### modelBind(type, handler) <a id="modelBind"/>
 * **String type - Backbone event type (e.g. 'change:title', 'error', etc )**
 * **function handler**
 
@@ -200,20 +187,17 @@ class LikeView extends View
     @$('.errors').append(message)
 ```
 
-<a id="modelUnbind"></a>
-### modelUnbind(type, handler)
+### modelUnbind(type, handler) <a id="modelUnbind"/>
 * **String type - Backbone event type (e.g. 'change:title', 'error', etc )**
 * **function handler**
 
   Unbind a handler from a model event
 
-<a id="modelUnbindAll"></a>
-### modelUnbindAll()
+### modelUnbindAll() <a id="modelUnbindAll"/>
 
   Unbind all recorded model event handlers.
 
-<a id="pass"></a>
-### pass(attribute, selector)
+### pass(attribute, selector) <a id="pass"/>
 * **String attribute - corresponds to a field on the model**
 * **String selector - a jQuery selector, object, or element**
 
@@ -236,7 +220,7 @@ class LikeView extends View
 
 ## Subviews
 
-### subview(name, [view])
+### subview(name, [view]) <a id="subview"></a>
 * **String name**,
 * **View view (when setting the subview)**
   
@@ -247,10 +231,10 @@ class LikeView extends View
   inheriting view (i.e. in [CollectionView](./chaplin.collection_view.md)
   or your own PageView base class).
 
-### removeSubview(nameOrView)
+### removeSubview(nameOrView) <a id="removeSubview"></a>
 Remove the specified subview. Can be called with either the `name` associated with the subview, or a reference to the subview instance.
 
-# Publish/Subscribe
+# Publish/Subscribe <a id="pub-sub"></a>
 
 The View includes the [EventBroker](./chaplin.event_broker.md) mixin
 Publish/Subscribe using the [mediator](./chaplin.mediator.md)
