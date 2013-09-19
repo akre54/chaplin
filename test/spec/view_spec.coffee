@@ -111,6 +111,13 @@ define [
       expect(view.el).to.be testbed.nextSibling
       expect(view.el.parentNode).to.be testbed.parentNode
 
+    it 'should not attach itself more than once', ->
+      spy = sinon.spy $::, 'append'
+      view = new TestView container: testbed
+      view.render()
+      view.render()
+      expect(spy.calledOnce).to.be true
+
     it 'should consider autoRender, container and containerMethod properties', ->
       view = new ConfiguredTestView()
       expect(renderCalled).to.be true

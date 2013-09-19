@@ -406,8 +406,9 @@ module.exports = class View extends Backbone.View
     # Attempt to bind this view to its named region.
     mediator.execute 'region:show', @region, this if @region?
 
-    # Automatically append to DOM if the container element is set.
-    if @container
+    # Automatically append to DOM if the container element is set and element
+    # is not already in the DOM.
+    if @container and not document.body.contains(@el)
       # Append the view to the DOM.
       $(@container)[@containerMethod] @el
       # Trigger an event.
