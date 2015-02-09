@@ -5,6 +5,8 @@ Backbone = require 'backbone'
 View = require 'chaplin/views/view'
 utils = require 'chaplin/lib/utils'
 
+# jQuery's $.fn.toggle is much more advanced than simply hiding. We're including
+# it here because it'd be a huge block of code to include
 toggleElement = (elem, visible) ->
   if Backbone.$
     Backbone.$(elem).toggle visible
@@ -30,7 +32,7 @@ insertView = (list, viewEl, position, length, itemSelector) ->
 
   if insertInMiddle or itemSelector
     # Get the children which originate from item views.
-    children = list.querySelectorAll(itemSelector)
+    children = list.querySelectorAll itemSelector
     childrenLength = children.length
 
     # Check if it needs to be inserted.
@@ -203,7 +205,7 @@ module.exports = class CollectionView extends View
 
   # When an item is added, create a new view and insert it.
   itemAdded: (item, collection, options) =>
-    @insertView item, @renderItem(item), options.at
+    @insertView @listEl, item.el, @renderItem(item), options.at
 
   # When an item is removed, remove the corresponding view from DOM and caches.
   itemRemoved: (item) =>
@@ -354,10 +356,10 @@ module.exports = class CollectionView extends View
       view = @subview "itemView:#{item.cid}"
       if view
         # Re-insert the view.
-        @insertView item, view, index, false
+        @insertView @listEl, item.el, view, index, false
       else
         # Create a new view, render and insert it.
-        @insertView item, @renderItem(item), index
+        @insertView @listEl, item.el, @renderItem(item), index
 
     # If no view was created, trigger `visibilityChange` event manually.
     @trigger 'visibilityChange', @visibleItems if items.length is 0
@@ -404,7 +406,10 @@ module.exports = class CollectionView extends View
 
     # Start animation.
     if included and enableAnimation
-      startAnimation view.el, @useCssAnimation, @animationStartClass
+      if @useCssAnimation
+        view.el.classList.add @animationStartClass
+      else
+        view.el.style.opacity = 0
 
     # Hide or mark the view if it’s filtered.
     @filterCallback view, included if @filterer
@@ -427,7 +432,8 @@ module.exports = class CollectionView extends View
         setTimeout (=> view.el.classList.add @animationEndClass), 0
       else
         # Fade the view in if it was made transparent before.
-        endAnimation view.el, @animationDuration
+        view.el.style.transition = "opacity #{(@animationDuration / 1000)}s"
+        view.el.opacity = 1
 
     view
 

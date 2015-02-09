@@ -86,7 +86,7 @@ define [
         collectionView.$list.children collectionView.itemSelector
       else
         if collectionView.itemSelector
-          (item for item in collectionView.list.children when Backbone.utils.matchesSelector item, collectionView.itemSelector)
+          (item for item in collectionView.list.children when item.tagName is collectionView.itemSelector)
         else
           collectionView.list.children
 
@@ -609,11 +609,7 @@ define [
           model.get('title') is 'new'
 
         filterCallback = (view, included) ->
-          cls = if included then 'included' else 'not-included'
-          if jQuery
-            view.$el.addClass cls
-          else
-            view.el.classList.add cls
+          view.el.classList.add if included then 'included' else 'not-included'
 
         filterCallbackSpy = sinon.spy filterCallback
         collectionView.filter filterer, filterCallbackSpy
